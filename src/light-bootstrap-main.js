@@ -7,11 +7,15 @@ import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
 import SideBar from './components/SidebarPlugin'
+import VueLazyload from "vue-lazyload";
 
 // asset imports
 import 'bootstrap/dist/css/bootstrap.css'
 import './assets/sass/light-bootstrap-dashboard.scss'
 import './assets/css/demo.css'
+import "@/assets/vendor/nucleo/css/nucleo.css";
+import "@/assets/vendor/font-awesome/css/font-awesome.css";
+import "@/assets/scss/argon.scss";
 
 /**
  * This is the main Light Bootstrap Dashboard Vue plugin where dashboard related plugins are registerd.

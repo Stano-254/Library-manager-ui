@@ -11,6 +11,14 @@
               <p class="card-category">Home to the best books</p>
               <router-link :to="{ name: 'add-book' }" class="m-2 p-2 btn-info btn-fill float-right rounded">Add Book</router-link>
             </template>
+            <div class="row justify-content-between">
+              <div class="col-md-5 my-2 mx-2">
+                <label for="bookSearch">
+                  <i class="fa fa-search position-absolute mt-4 ml-2 text-success" aria-hidden="true"></i></label>
+                  <input type="text" id="bookSearch" class="form-control pl-5" v-model="searchQuery"  @input="handleDelaySearchInput" placeholder="Search by title | author" >
+                 
+              </div>
+              </div>
             <l-table class="table-hover table-striped"
                      :columns="books.columns"
                      :data="books.data"
@@ -42,6 +50,7 @@
     },
     data () {
       return {
+        searchQuery: '',
         books: {
           columns: [...tableColumns],
           data: [...tableData],
@@ -52,6 +61,15 @@
     },
     mounted(){
       this.fetchBookData()
+    },
+    computed:{
+      filteredOptions(event) {
+      const query = this.searchQuery.toLowerCase();
+      console.log("query",query)
+      // return this.members_data.filter(
+      //   option => option.first_name.toLowerCase().includes(query) || option.last_name.toLowerCase().includes(query) ||
+      //   option.membership_no.toLowerCase().includes(query) );
+      }
     },
     methods:{
 
@@ -82,6 +100,24 @@
               console.log(error)
               this.notifyVue('top', 'right','Error displaying books','danger')
             });
+        },
+        handleDelaySearchInput() {
+             clearTimeout(this.delayTimer);
+             this.delayTimer = setTimeout(this.search, 300); // Set the delay time (e.g., 300 milliseconds)
+         },
+      search() {
+      // Make API request to fetch search results based on searchQuery
+      // Replace 'apiEndpoint' with your actual API endpoint URL
+
+      // Assuming you're using Axios library for HTTP requests
+      apiClient.post('books/filtered_books/', { params: { query: this.searchQuery } })
+          .then(response => {
+            console.log(this.searchQuery, "response seacrh",response.data.data)
+          this.books.data = response.data.data;
+        })
+          .catch(error => {
+          console.error(error);
+        });
         },
       
       handleBooksTableAction(action, book_data) {

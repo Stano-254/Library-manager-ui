@@ -23,15 +23,19 @@ import Category from 'src/pages/Category.vue'
 import AddCategory from 'src/pages/category/AddCategory.vue'
 // user
 import UserProfile from 'src/pages/UserProfile.vue'
+// landing page
+import Landing from 'src/pages/Landing.vue'
+// login
+import Login from 'src/pages/Login.vue'
 
 
 
 const routes = [
-  {
-    path: '/',
-    component: DashboardLayout,
-    redirect: '/admin/overview'
-  },
+  // {
+  //   path: '/',
+  //   component: DashboardLayout,
+  //   redirect: '/admin/overview'
+  // },
   {
     path: '/admin',
     component: DashboardLayout,
@@ -113,6 +117,17 @@ const routes = [
   
     ]
   },
+  {
+    path: '/landing',
+    name : 'landing',
+    component: Landing
+  },
+  {
+    path: '/login',
+    name : 'login',
+    component: Login
+  },
+
   { path: '*', component: NotFound }
 ]
 

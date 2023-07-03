@@ -1,7 +1,6 @@
 <template>
   
   <div class="notifications">
-    <p>names</p>
     <transition-group :name="transitionName"
                       :mode="transitionMode">
       <notification
